@@ -17,7 +17,7 @@ class Signup_page extends StatefulWidget {
 class _Signup_pageState extends State<Signup_page> {
   final TextEditingController _passwordTextController = TextEditingController();
   final TextEditingController _emailTextController = TextEditingController();
-  final TextEditingController _userNameTextController = TextEditingController();
+  final TextEditingController _confirmpasswordTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,11 +43,6 @@ class _Signup_pageState extends State<Signup_page> {
                 const SizedBox(
                   height: 30,
                 ),
-                reusableTextField("Enter UserName", Icons.person_outline, false,
-                    _userNameTextController),
-                const SizedBox(
-                  height: 20,
-                ),
                 reusableTextField("Enter Email Id", Icons.person_outline, false,
                     _emailTextController),
                 const SizedBox(
@@ -58,18 +53,30 @@ class _Signup_pageState extends State<Signup_page> {
                 const SizedBox(
                   height: 20,
                 ),
+                reusableTextField("Confirm  Password", Icons.lock_outline, true,
+                    _confirmpasswordTextController),
+                const SizedBox(
+                  height: 20,
+                ),
                 firebaseUIButton(context, "Sign Up", () {
-                  FirebaseAuth.instance
-                      .createUserWithEmailAndPassword(
-                          email: _emailTextController.text,
-                          password: _passwordTextController.text)
-                      .then((value) {
-                    print("Created New Account");
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const Homepage()));
-                  }).onError((error, stackTrace) {
-                    print("Error ${error.toString()}");
-                  });
+                  if (_confirmpasswordTextController.text == _passwordTextController.text) {
+                    FirebaseAuth.instance
+                        .createUserWithEmailAndPassword(
+                            email: _emailTextController.text,
+                            password: _passwordTextController.text)
+                        .then((value) {
+                      const snackBar = SnackBar(content: Text("Congragulations for creating account"));
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => const Homepage()));
+                    }).onError((error, stackTrace) {
+                      final snackBar = SnackBar(content: Text(" ${error.toString().split(']')[1].toString()}"));
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    });
+                  }else {
+                    const snackBar = SnackBar(content: Text("Password Mismatching"));
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                }
                 }),
                 signIpOption()
               ]

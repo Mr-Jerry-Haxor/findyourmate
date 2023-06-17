@@ -1,5 +1,6 @@
 // ignore_for_file: camel_case_types, duplicate_ignore
 
+import 'package:findyourmate/screens/resetpassword_page.dart';
 import 'package:findyourmate/screens/signup_page.dart';
 import 'package:findyourmate/utils/color_utils.dart';
 import 'package:findyourmate/widgets/widgets.dart';
@@ -43,7 +44,7 @@ class _SignIn_pageState extends State<SignIn_page> {
                 const SizedBox(
                   height: 30,
                 ),
-                reusableTextField("Enter UserName", Icons.person_outline, false,
+                reusableTextField("Enter Email id", Icons.person_outline, false,
                     _emailTextController),
                 const SizedBox(
                   height: 20,
@@ -51,8 +52,9 @@ class _SignIn_pageState extends State<SignIn_page> {
                 reusableTextField("Enter Password", Icons.lock_outline, true,
                     _passwordTextController),
                 const SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
+                forgetPassword(context),
                 firebaseUIButton(context, "Sign In", () {
                   FirebaseAuth.instance
                       .signInWithEmailAndPassword(
@@ -62,7 +64,9 @@ class _SignIn_pageState extends State<SignIn_page> {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => const Homepage()));
                   }).onError((error, stackTrace) {
-                    print("Error ${error.toString()}");
+                    // print("Error ${error.toString()}");
+                    final snackBar = SnackBar(content: Text(" ${error.toString().split(']')[1].toString()}"));
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   });
                 }),
                 signUpOption()
@@ -90,6 +94,24 @@ class _SignIn_pageState extends State<SignIn_page> {
           ),
         )
       ],
+    );
+  }
+
+  
+  Widget forgetPassword(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 35,
+      alignment: Alignment.bottomRight,
+      child: TextButton(
+        child: const Text(
+          "Forgot Password?",
+          style: TextStyle(color: Colors.white70),
+          textAlign: TextAlign.right,
+        ),
+        onPressed: () => Navigator.push(
+            context, MaterialPageRoute(builder: (context) => const Resetpassword_page())),
+      ),
     );
   }
 }
