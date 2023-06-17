@@ -55,6 +55,11 @@ class _SignIn_pageState extends State<SignIn_page> {
                 ),
                 forgetPassword(context),
                 firebaseUIButton(context, "Sign In", () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return const Center(child: CircularProgressIndicator());
+                  });
                   FirebaseAuth.instance
                       .signInWithEmailAndPassword(
                           email: _emailTextController.text,
@@ -67,6 +72,7 @@ class _SignIn_pageState extends State<SignIn_page> {
                     final snackBar = SnackBar(content: Text(" ${error.toString().split(']')[1].toString()}"));
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   });
+                  Navigator.of(context).pop();
                 }),
                 signUpOption()
               ]

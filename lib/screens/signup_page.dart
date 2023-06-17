@@ -113,6 +113,11 @@ class _Signup_pageState extends State<Signup_page> {
                   height: 20,
                 ),
                 firebaseUIButton(context, "Sign Up", () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return const Center(child: CircularProgressIndicator());
+                  });
                   if (_confirmpasswordTextController.text == _passwordTextController.text) {
                     FirebaseAuth.instance
                         .createUserWithEmailAndPassword(
@@ -145,6 +150,7 @@ class _Signup_pageState extends State<Signup_page> {
                     const snackBar = SnackBar(content: Text("Password Mismatching"));
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 }
+                Navigator.of(context).pop();
                 }),
                 signIpOption(),
                 const SizedBox(

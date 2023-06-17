@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       title: 'G-mate (Find your mate)',
       theme: ThemeData(
 
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 48, 131, 255)),
         useMaterial3: true,
       ),
       home: const SignIn_page(),
