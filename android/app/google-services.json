@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "508221527098",
+    "project_id": "find-your-mate-739b3",
+    "storage_bucket": "find-your-mate-739b3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:508221527098:android:08478003180680617e5103",
+        "android_client_info": {
+          "package_name": "com.example.findyourmate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "508221527098-ju2furhdhnb86q5kg32co5le4sufm93q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcaHwztKj_S3BMgEL6VPmnMFTdXx6obbw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "508221527098-ju2furhdhnb86q5kg32co5le4sufm93q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
