@@ -2,7 +2,6 @@
 
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
-import 'package:findyourmate/screens/signin_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -25,8 +24,8 @@ class _HomepageState extends State<Homepage> {
         bottomNavigationBar: CurvedNavigationBar(
           key: _bottomNavigationKey,
           animationDuration : const Duration(microseconds: 300),
-          color : Color.fromARGB(255, 58, 130, 255),
-          backgroundColor: Color.fromARGB(255, 255, 255, 255),
+          color : const Color.fromARGB(255, 58, 130, 255),
+          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           items: const [
             CurvedNavigationBarItem(
               child: Icon(Icons.home_outlined),
