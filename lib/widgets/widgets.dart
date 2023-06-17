@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types, use_key_in_widget_constructors, non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 
 Image logoWidget(String imageName) {
@@ -69,4 +71,47 @@ Container firebaseUIButton(BuildContext context, String title, Function onTap) {
   );
 }
 
+
+
+
+
+class profile_text_box extends StatelessWidget {
+  final String field_text;
+  final void Function()? onPressed;
+  
+  const profile_text_box({
+    super.key,
+    required this.field_text,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color:  const Color.fromARGB(255, 198, 207, 221),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      padding:const EdgeInsets.only(left:15,bottom:5),
+      margin:const EdgeInsets.only(left:15,top:10,right:25),
+      child :  Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(field_text),
+              IconButton(
+                icon: const Icon(
+                  Icons.edit,
+                  color: Color.fromARGB(255, 2, 2, 2)
+                ), onPressed: onPressed,
+              )
+            ]
+          )
+        ],
+      )
+    );
+  }
+}
 

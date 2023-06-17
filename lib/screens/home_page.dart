@@ -3,7 +3,7 @@
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
 import 'package:findyourmate/screens/chat_page.dart';
-import 'package:findyourmate/screens/profile_page.dart';
+import 'package:findyourmate/screens/profile.dart';
 import 'package:findyourmate/screens/projects_page.dart';
 import 'package:findyourmate/screens/search_page.dart';
 import 'package:findyourmate/screens/wallofprojects_page.dart';
@@ -96,7 +96,7 @@ class _HomepageState extends State<Homepage> {
         widget = const Projects_page();
         break;
       case 4:
-        widget = const profile_page();
+        widget = profilepage();
         break;
       default :
         widget=const wallofprojects_page();

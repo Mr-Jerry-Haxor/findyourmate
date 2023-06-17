@@ -125,7 +125,7 @@ class _Signup_pageState extends State<Signup_page> {
                             password: _passwordTextController.text)
                         .then((value) {
                           // add user details
-                       FirebaseFirestore.instance.collection("users").add({
+                       FirebaseFirestore.instance.collection("users").doc(_emailTextController.text.trim()).set({
                         "firstname" : _firstname.text.trim(),
                         "lastname" : _lastname.text.trim(),
                         "email" : _emailTextController.text.trim(),
