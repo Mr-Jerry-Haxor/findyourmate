@@ -10,15 +10,18 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
+        
         child: ElevatedButton(
-          child: const Text("Logout"),
+          child: Text("singed as " + user.email! + "  , press to Logout"),
           onPressed: () {
             FirebaseAuth.instance.signOut().then((value) {
-              print("Signed Out");
+              const snackBar = SnackBar(content: Text("Your are logged out"));
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const SignIn_page()));
             });

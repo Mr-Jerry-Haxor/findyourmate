@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types
+// ignore_for_file: camel_case_types, non_constant_identifier_names
 
 import 'package:findyourmate/screens/signin_page.dart';
 import 'package:findyourmate/utils/color_utils.dart';
@@ -24,9 +24,8 @@ class _Resetpassword_pageState extends State<Resetpassword_page> {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors:  [
-                hexStringToColor("CB2B93"),
-                hexStringToColor("9546C4"),
-                hexStringToColor("5E61F4")
+                hexStringToColor("93acf8"),
+                hexStringToColor("2e68ff")
               ] , begin: Alignment.topCenter , end: Alignment.bottomCenter
             )
         ),

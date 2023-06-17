@@ -1,5 +1,6 @@
 // ignore_for_file: camel_case_types
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:findyourmate/screens/home_page.dart';
 import 'package:findyourmate/screens/signin_page.dart';
 import 'package:findyourmate/utils/color_utils.dart';
@@ -15,6 +16,15 @@ class Signup_page extends StatefulWidget {
 }
 
 class _Signup_pageState extends State<Signup_page> {
+  final _firstname = TextEditingController();
+  final _lastname = TextEditingController();
+  final _mobile = TextEditingController();
+  final _work = TextEditingController();
+  final _address = TextEditingController();
+  final _skills = TextEditingController();
+  final _study = TextEditingController();
+  final _projects = TextEditingController();
+  final _experience = TextEditingController();
   final TextEditingController _passwordTextController = TextEditingController();
   final TextEditingController _emailTextController = TextEditingController();
   final TextEditingController _confirmpasswordTextController = TextEditingController();
@@ -27,9 +37,8 @@ class _Signup_pageState extends State<Signup_page> {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors:  [
-                hexStringToColor("CB2B93"),
-                hexStringToColor("9546C4"),
-                hexStringToColor("5E61F4")
+                hexStringToColor("93acf8"),
+                hexStringToColor("2e68ff")
               ] , begin: Alignment.topCenter , end: Alignment.bottomCenter
             )
         ),
@@ -43,8 +52,53 @@ class _Signup_pageState extends State<Signup_page> {
                 const SizedBox(
                   height: 30,
                 ),
-                reusableTextField("Enter Email Id", Icons.person_outline, false,
+                reusableTextField("Enter First name", Icons.person_outline, false,
+                    _firstname),
+                const SizedBox(
+                  height: 20,
+                ),
+                reusableTextField("Enter Last name", Icons.person_outline, false,
+                    _lastname),
+                const SizedBox(
+                  height: 20,
+                ),
+                reusableTextField("Enter Email Id", Icons.attach_email_outlined, false,
                     _emailTextController),
+                const SizedBox(
+                  height: 20,
+                ),
+                reusableTextField("Enter phone number", Icons.phone_android_outlined, false,
+                    _mobile),
+                const SizedBox(
+                  height: 20,
+                ),
+                reusableTextField("Student or Job ", Icons.work_history_outlined, false,
+                    _work),
+                const SizedBox(
+                  height: 20,
+                ),
+                reusableTextField("Enter address", Icons.place_outlined, false,
+                    _address),
+                const SizedBox(
+                  height: 20,
+                ),
+                reusableTextField("Enter your skills(separated by comma)", Icons.computer, false,
+                    _skills),
+                const SizedBox(
+                  height: 20,
+                ),
+                reusableTextField("Enter your education details", Icons.book_rounded, false,
+                    _study),
+                const SizedBox(
+                  height: 20,
+                ),
+                reusableTextField("Enter your experience(if any)", Icons.work_history_outlined, false,
+                    _experience),
+                const SizedBox(
+                  height: 20,
+                ),
+                reusableTextField("projects(if any,separated by comma)", Icons.lightbulb_outline_rounded, false,
+                    _projects),
                 const SizedBox(
                   height: 20,
                 ),
@@ -65,6 +119,20 @@ class _Signup_pageState extends State<Signup_page> {
                             email: _emailTextController.text,
                             password: _passwordTextController.text)
                         .then((value) {
+                          // add user details
+                       FirebaseFirestore.instance.collection("users").add({
+                        "firstname" : _firstname.text.trim(),
+                        "lastname" : _lastname.text.trim(),
+                        "email" : _emailTextController.text.trim(),
+                        "phoneno" : _mobile.text.trim(),
+                        "work" : _work.text.trim(),
+                        "address" : _address.text.trim(),
+                        "skills" : _skills.text.trim(),
+                        "study" : _study.text.trim(),
+                        "projects" : _projects.text.trim(),
+                        "experience" : _experience.text.trim(),
+                      });
+
                       const snackBar = SnackBar(content: Text("Congragulations for creating account"));
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       Navigator.push(context,
@@ -78,7 +146,10 @@ class _Signup_pageState extends State<Signup_page> {
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 }
                 }),
-                signIpOption()
+                signIpOption(),
+                const SizedBox(
+                  height: 40,
+                ),
               ]
             ),
           ),
@@ -86,6 +157,7 @@ class _Signup_pageState extends State<Signup_page> {
       )
     );
   }
+
   Row signIpOption() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
