@@ -1,6 +1,6 @@
 
 import 'package:findyourmate/firebase_options.dart';
-import 'package:findyourmate/screens/signin_page.dart';
+import 'package:findyourmate/screens/auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +31,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 48, 131, 255)),
         useMaterial3: true,
       ),
-      home: const SignIn_page(),
+      debugShowCheckedModeBanner: false,
+      home: const AuthPage(),
     );
   }
 }
