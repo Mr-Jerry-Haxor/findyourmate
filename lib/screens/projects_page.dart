@@ -51,7 +51,7 @@ class Projects_page extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => AddProjects()),
+                    MaterialPageRoute(builder: (context) => Addproject_page()),
                   );
                 },
               ),
@@ -64,7 +64,7 @@ class Projects_page extends StatelessWidget {
                 itemCount: dataList.length,
                 itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) =>
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.fromLTRB(8,50,8,8),
                     child: Container(
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height,
@@ -74,8 +74,7 @@ class Projects_page extends StatelessWidget {
                           colors:  [
                               hexStringToColor("93acf8"),
                               hexStringToColor("2e68ff"),
-                              hexStringToColor("93acf8"),
-                            ] , begin: Alignment.topCenter , end: Alignment.bottomCenter
+                            ] , begin: Alignment.topLeft , end: Alignment.bottomRight
                           ),
                         borderRadius: BorderRadius.circular(10),
                         
@@ -85,14 +84,19 @@ class Projects_page extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           
                           children: [
-                            
+                            Text('  Project id :${itemIndex+1}', style: TextStyle(fontWeight: FontWeight.bold),),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text('${dataList[itemIndex]["title"]}', style: TextStyle(fontSize: 40.0),),
+                              child: Text('${dataList[itemIndex]["title"]}', style: TextStyle(fontSize: 40.0,fontWeight: FontWeight.bold),),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text('Description      :  ${dataList[itemIndex]["description"]}', style: TextStyle(fontSize: 16.0),),
+                            ),
+                            
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text('Skills required  : ${dataList[itemIndex]["skills"]}', style: TextStyle(fontSize: 16.0),),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -100,7 +104,11 @@ class Projects_page extends StatelessWidget {
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text('Skills required  : ${dataList[itemIndex]["skills"]}', style: TextStyle(fontSize: 16.0),),
+                              child: Text('Expected time required : ${dataList[itemIndex]["duration"]}', style: TextStyle(fontSize: 16.0),),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text('Other deatils : ${dataList[itemIndex]["other"]}', style: TextStyle(fontSize: 16.0),),
                             ),
                           ]
                         ),
@@ -111,7 +119,7 @@ class Projects_page extends StatelessWidget {
                   ), options: CarouselOptions(
                     enlargeCenterPage: true,
                     viewportFraction: 1.0,
-                    aspectRatio: 0.69,
+                    aspectRatio: 0.65,
                     initialPage: 1,
                     scrollDirection: Axis.horizontal,
                     autoPlay: true,
@@ -143,18 +151,3 @@ class Projects_page extends StatelessWidget {
   }
 }
 
-class AddProjects extends StatelessWidget {
-  const AddProjects({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Another Page'),
-      ),
-      body: Center(
-        child: Text('No data available.'),
-      ),
-    );
-  }
-}

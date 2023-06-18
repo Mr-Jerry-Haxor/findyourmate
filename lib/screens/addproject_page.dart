@@ -19,7 +19,7 @@ class _Addproject_pageState extends State<Addproject_page> {
   final _skills = TextEditingController();
   final _members = TextEditingController();
   final _duration = TextEditingController();
-  final _timestamp = TextEditingController();
+  final _other = TextEditingController();
 
   void signOut() {
     FirebaseAuth.instance.signOut();
@@ -52,7 +52,7 @@ class _Addproject_pageState extends State<Addproject_page> {
                   ),
                   const Text(
                     "Add Project details",
-                    style: TextStyle(fontSize: 30, color: Colors.black38),
+                    style: TextStyle(fontSize: 30, color: Color.fromARGB(178, 0, 0, 0),fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(
                     height: 30,
@@ -82,8 +82,8 @@ class _Addproject_pageState extends State<Addproject_page> {
                   const SizedBox(
                     height: 20,
                   ),
-                  reusableTextField("Enter Timestamp", Icons.calendar_month_outlined, false,
-                      _timestamp),
+                  reusableTextField("Other deatils", Icons.calendar_month_outlined, false,
+                      _other),
                   const SizedBox(
                     height: 20,
                   ),
@@ -101,7 +101,8 @@ class _Addproject_pageState extends State<Addproject_page> {
                       "email" : FirebaseAuth.instance.currentUser!.email,
                       "duration" : _duration.text.trim(),
                       "members" : _members.text.trim(),
-                      "time" : _timestamp.text.trim(),
+                      "other"  : _other.text.trim(),
+                      "time" : Timestamp.now(),
                       });
         
                       const snackBar = SnackBar(content: Text("Project Added successfully"));
@@ -114,7 +115,15 @@ class _Addproject_pageState extends State<Addproject_page> {
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       Navigator.of(context).pop();
                     }
-                  }),
+                  },
+                  ),
+                  IconButton(onPressed: () {
+                    Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => const Homepage()));
+                    }, 
+                    icon: const Icon(Icons.arrow_back_rounded), 
+                    iconSize: 40,
+                  )
                 ]
         ),
         )

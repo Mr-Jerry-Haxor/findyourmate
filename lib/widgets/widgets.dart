@@ -42,7 +42,7 @@ TextField reusableTextField(String text, IconData icon, bool isPasswordType,
   );
 }
 
-Container firebaseUIButton(BuildContext context, String title, Function onTap) {
+Container firebaseUIButton(BuildContext context, String title, Function onTap, [IconButton? iconButton]) {
   return Container(
     width: MediaQuery.of(context).size.width,
     height: 50,
