@@ -41,6 +41,8 @@ dependencies:
   cloud_firestore: ^4.8.1
   curved_labeled_navigation_bar: ^2.0.2
   stacked_card_carousel: ^0.0.4
+  carousel_slider: ^4.2.1
+  flutter_form_builder: ^9.0.0
 
 dev_dependencies:
   flutter_test:

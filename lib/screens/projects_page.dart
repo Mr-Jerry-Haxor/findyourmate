@@ -1,5 +1,8 @@
 // ignore_for_file: camel_case_types, prefer_const_constructors, unused_local_variable
 
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:findyourmate/screens/addproject_page.dart';
+import 'package:findyourmate/utils/color_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -55,29 +58,88 @@ class Projects_page extends StatelessWidget {
             );
           }
 
-          return ListView.builder(
-            itemCount: dataList.length,
-            itemBuilder: (BuildContext context, int index) {
-              final data = dataList[index];
-              // final dataId = snapshot.data?[index];
-              
-              return Card(
-                child: ListTile(
-                  title: Text(data['title'].toString()),
-                  subtitle: Text(data['description'].toString()),
-                  trailing: IconButton(
-                    icon: Icon(Icons.edit),
-                    onPressed: () {
-                      // Perform edit operation for the data with ID dataId
-                    },
+          return Column(
+            children: [
+              CarouselSlider.builder(
+                itemCount: dataList.length,
+                itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) =>
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height,
+                      margin: EdgeInsets.symmetric(horizontal: 2.0),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors:  [
+                              hexStringToColor("93acf8"),
+                              hexStringToColor("2e68ff"),
+                              hexStringToColor("93acf8"),
+                            ] , begin: Alignment.topCenter , end: Alignment.bottomCenter
+                          ),
+                        borderRadius: BorderRadius.circular(10),
+                        
+                      ),
+                       child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          
+                          children: [
+                            
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text('${dataList[itemIndex]["title"]}', style: TextStyle(fontSize: 40.0),),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text('Description      :  ${dataList[itemIndex]["description"]}', style: TextStyle(fontSize: 16.0),),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text('Members required : ${dataList[itemIndex]["members"]}', style: TextStyle(fontSize: 16.0),),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text('Skills required  : ${dataList[itemIndex]["skills"]}', style: TextStyle(fontSize: 16.0),),
+                            ),
+                          ]
+                        ),
+                      ),
+                      
+
+                    ),
+                  ), options: CarouselOptions(
+                    enlargeCenterPage: true,
+                    viewportFraction: 1.0,
+                    aspectRatio: 0.69,
+                    initialPage: 1,
+                    scrollDirection: Axis.horizontal,
+                    autoPlay: true,
+                    autoPlayInterval: Duration(seconds: 3),
+                    autoPlayAnimationDuration: Duration(milliseconds: 800),
+                    autoPlayCurve: Curves.fastOutSlowIn,
                   ),
-                ),
-              );
-            },
+              ),
+            TextButton.icon(
+              onPressed: () { Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Addproject_page())); }, 
+              icon: const Icon(
+                  
+                  Icons.post_add_outlined,
+                  color: Color.fromARGB(255, 2, 2, 2),
+                  size: 30.0,
+                ), 
+              label: Text("Add new project"),
+              ),
+            ],
           );
-        },
+          
+        }
       ),
     );
+  }
+
+  void onPressed() {
   }
 }
 
