@@ -52,6 +52,13 @@ class _Signup_pageState extends State<Signup_page> {
                 const SizedBox(
                   height: 30,
                 ),
+                const Text(
+                  "Fill your details to Signup",
+                  style: TextStyle(fontSize: 30, color: Colors.black38),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
                 reusableTextField("Enter First name", Icons.person_outline, false,
                     _firstname),
                 const SizedBox(

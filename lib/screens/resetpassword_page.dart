@@ -39,7 +39,7 @@ class _Resetpassword_pageState extends State<Resetpassword_page> {
                 const SizedBox(
                   height: 30,
                 ),
-                reusableTextField("Enter Email Id", Icons.person_outline, false,
+                reusableTextField("Enter Email Id", Icons.attach_email_outlined, false,
                     _emailTextController),
                 const SizedBox(
                   height: 10,
