@@ -39,7 +39,14 @@ class _SignIn_pageState extends State<SignIn_page> {
                 20, MediaQuery.of(context).size.height * 0.2, 20, 0),
             child: Column(
               children: <Widget>[
-                logoWidget("images/logo1.png"),
+                logoWidget("images/logo2.png"),
+                const SizedBox(
+                  height: 30,
+                ),
+                const Text(
+                  "G-mate App(Find your project mate)",
+                  style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 0, 0, 0),fontWeight: FontWeight.bold),
+                ),
                 const SizedBox(
                   height: 30,
                 ),

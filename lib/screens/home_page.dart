@@ -2,10 +2,10 @@
 
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
-import 'package:findyourmate/screens/chat_page.dart';
 import 'package:findyourmate/screens/profile.dart';
 import 'package:findyourmate/screens/projects_page.dart';
 import 'package:findyourmate/screens/search_page.dart';
+import 'package:findyourmate/screens/signin_page.dart';
 import 'package:findyourmate/screens/wallofprojects_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -23,8 +23,11 @@ class _HomepageState extends State<Homepage> {
   int _page = 0;
   GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
 
-  void signOut() {
-    FirebaseAuth.instance.signOut();
+  void signOut() async{
+    await FirebaseAuth.instance.signOut();
+    // ignore: use_build_context_synchronously
+    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const SignIn_page()));
   }
 
   @override
@@ -51,10 +54,6 @@ class _HomepageState extends State<Homepage> {
             CurvedNavigationBarItem(
               child: Icon(Icons.search),
               label: 'Search',
-            ),
-            CurvedNavigationBarItem(
-              child: Icon(Icons.chat_bubble_outline),
-              label: 'Chat',
             ),
             CurvedNavigationBarItem(
               child: Icon(Icons.newspaper),
@@ -90,12 +89,9 @@ class _HomepageState extends State<Homepage> {
         widget = const search_page();
         break;
       case 2:
-        widget = const chat_page();
-        break;
-      case 3:
         widget = const Projects_page();
         break;
-      case 4:
+      case 3:
         widget = profilepage();
         break;
       default :
