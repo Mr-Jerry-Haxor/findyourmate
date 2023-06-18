@@ -110,11 +110,18 @@ class Projects_page extends StatelessWidget {
                               padding: const EdgeInsets.all(8.0),
                               child: Text('Other deatils : ${dataList[itemIndex]["other"]}', style: TextStyle(fontSize: 16.0),),
                             ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text('Likes : ${dataList[itemIndex]["likes"].length}', style: TextStyle(fontSize: 16.0),),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text('Liked by : \n ${dataList[itemIndex]["likes"].toString().replaceAll("[", "").replaceAll("]", "").replaceAll(",", "\n")}' , style: TextStyle(fontSize: 16.0),),
+                            ),
                           ]
                         ),
                       ),
                       
-
                     ),
                   ), options: CarouselOptions(
                     enlargeCenterPage: true,

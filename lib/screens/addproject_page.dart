@@ -103,6 +103,7 @@ class _Addproject_pageState extends State<Addproject_page> {
                       "members" : _members.text.trim(),
                       "other"  : _other.text.trim(),
                       "time" : Timestamp.now(),
+                      "likes" : [],
                       });
         
                       const snackBar = SnackBar(content: Text("Project Added successfully"));

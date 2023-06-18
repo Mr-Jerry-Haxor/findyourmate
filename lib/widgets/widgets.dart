@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, use_key_in_widget_constructors, non_constant_identifier_names
+// ignore_for_file: camel_case_types, use_key_in_widget_constructors, non_constant_identifier_names, must_be_immutable
 
 import 'package:flutter/material.dart';
 
@@ -116,3 +116,30 @@ class profile_text_box extends StatelessWidget {
 }
 
 
+class LikeButton extends StatelessWidget {
+  final int postindx;
+  final List likes;
+  final String email;
+  final List ids;
+  void Function()? onTap;
+  bool isLiked = false;
+  LikeButton({super.key, required this.ids, required this.postindx, required this.email, required this.likes});
+
+  @override
+  Widget build(BuildContext context) {
+    if (likes.contains(email)){
+      isLiked = true;
+    }
+    else {
+      isLiked = false;
+    }
+    return GestureDetector(
+      onTap: onTap,
+      child: Icon(
+        isLiked ? Icons.favorite : Icons.favorite_border,
+        color: isLiked ? Colors.red : Colors.grey,
+        size: 40,
+      )
+    );
+  }
+}

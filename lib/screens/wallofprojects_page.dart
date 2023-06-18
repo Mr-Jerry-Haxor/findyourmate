@@ -1,13 +1,26 @@
 // ignore_for_file: camel_case_types
 
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:findyourmate/screens/home_page.dart';
 import 'package:findyourmate/utils/color_utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class WallofProjects_page extends StatelessWidget {
+class WallofProjects_page extends StatefulWidget {
   const WallofProjects_page({super.key});
 
+  @override
+  State<WallofProjects_page> createState() => _WallofProjects_pageState();
+}
+
+class _WallofProjects_pageState extends State<WallofProjects_page> {
+  final currentUser = FirebaseAuth.instance.currentUser!;
+  bool isLiked = false;
+
+
+  // ignore: prefer_typing_uninitialized_variables
+  var idsList;
   Future<List<Map<String, dynamic>>> fetchData() async {
     final snapshot = await FirebaseFirestore.instance
         .collection('projects')
@@ -15,7 +28,7 @@ class WallofProjects_page extends StatelessWidget {
         .get();
 
     final dataList = snapshot.docs.map((doc) => doc.data()).toList();
-
+    idsList = snapshot.docs.map((doc) =>doc.id).toList();
     return dataList;
   }
 
@@ -23,7 +36,6 @@ class WallofProjects_page extends StatelessWidget {
     DateTime dt=t.toDate();
     return dt.toString();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -92,9 +104,39 @@ class WallofProjects_page extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(8,8,8,0),
-                              child: Text('  Posted by : ${dataList[itemIndex]["email"]} ', style: const TextStyle(fontWeight: FontWeight.bold),),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(8,8,8,0),
+                                  child: Text('  Posted by : ${dataList[itemIndex]["email"]} ', style: const TextStyle(fontWeight: FontWeight.bold),),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(8,8,18,0),
+                                  child: ElevatedButton.icon(
+                                    onPressed:(){
+                                      if (dataList[itemIndex]["likes"].contains(currentUser.email!)){
+                                        dataList[itemIndex]["likes"].remove(currentUser.email!);
+                                        FirebaseFirestore.instance.collection('projects').doc(idsList[itemIndex]).update({"likes" : dataList[itemIndex]["likes"]});
+                                      }
+                                      else{
+                                        dataList[itemIndex]["likes"].add(currentUser.email!);
+                                        FirebaseFirestore.instance.collection('projects').doc(idsList[itemIndex]).update({"likes" : dataList[itemIndex]["likes"]});
+                                      }
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => const Homepage()));
+                                    }, 
+                                    icon: Icon(
+                                      dataList[itemIndex]["likes"].contains(currentUser.email!) ? Icons.favorite : Icons.favorite_border,
+                                      color: dataList[itemIndex]["likes"].contains(currentUser.email!) ? Colors.red : Colors.grey,
+                                      size: 40,
+                                    ), 
+                                    label: Text(dataList[itemIndex]["likes"].length.toString()),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:hexStringToColor("93acf8"),
+                                    )
+                                  )
+                                )
+                              ],
                             ),
                             Padding(
                               padding: const EdgeInsets.fromLTRB(8,8,8,0),
@@ -151,6 +193,9 @@ class WallofProjects_page extends StatelessWidget {
     );
   }
 }
+
+
+
 
 class AnotherPage extends StatelessWidget {
   const AnotherPage({super.key});
