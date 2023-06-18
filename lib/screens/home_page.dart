@@ -84,7 +84,7 @@ class _HomepageState extends State<Homepage> {
     Widget widget;
     switch(index){
       case 0:
-        widget = const wallofprojects_page();
+        widget = const WallofProjects_page();
         break;
       case 1:
         widget = const search_page();
@@ -99,7 +99,7 @@ class _HomepageState extends State<Homepage> {
         widget = profilepage();
         break;
       default :
-        widget=const wallofprojects_page();
+        widget=const WallofProjects_page();
         break;
 
     }

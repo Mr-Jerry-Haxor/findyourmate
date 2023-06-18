@@ -120,7 +120,7 @@ class Projects_page extends StatelessWidget {
                     enlargeCenterPage: true,
                     viewportFraction: 1.0,
                     aspectRatio: 0.65,
-                    initialPage: 1,
+                    initialPage: 0,
                     scrollDirection: Axis.horizontal,
                     autoPlay: true,
                     autoPlayInterval: Duration(seconds: 3),
